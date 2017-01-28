@@ -2,7 +2,7 @@ from pws import Google
 
 
 search = Google.search(query='trump inauguration photo', num=10, start=0, country_code="es")
-news = Google.search_news('github', 10, 0, True, 'd', "es")
+news = Google.search_news('trump inauguration photo', 10, 0, True, 'd', "es")
 
 # print search
 # print news
