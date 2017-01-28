@@ -33,5 +33,8 @@ hr{color:black;}
 .items_cont .ml_cont .stats .col ul li{margin:5px 5px; text-align: left; position: relative; color:black; border-radius:3px; border:1px solid white; padding: 5px;}
 .items_cont .ml_cont .stats .col ul li span{z-index: 50;position: relative;left:0;top:0; color:rgb(111, 165, 180);}
 .items_cont .ml_cont .stats .col ul li div{height:100%; width:50%; background:white; position: absolute; top:0; left:0;}
+.items_cont .ml_cont .overalltotal{position: relative; background:rgb(240, 235, 225); padding:2px; border: 2px solid rgb(240, 235, 225);}
+.items_cont .ml_cont .overalltotal span{position: relative;top:0;left:0;}
+.items_cont .ml_cont .overalltotal div{position: absolute;top:0;left:0;background:white;height:100%;width:70%;}
 .items_cont .ml_cont .keywords h4{text-align: center;}
 .items_cont .ml_cont .keywords li{width:33%; display:inline-block;}
