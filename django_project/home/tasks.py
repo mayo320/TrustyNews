@@ -1,6 +1,6 @@
 from celery import Celery
 from .models import Message
-#app = Celery('tasks', broker='amqp://localhost')
+app = Celery('tasks', broker='amqp://localhost')
 
 @app.task
 def add(x, y):

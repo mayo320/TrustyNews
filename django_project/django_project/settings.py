@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'trustynews',
     'home',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -101,13 +102,12 @@ USE_L10N = True
 USE_TZ = True
 
 # CELERY STUFF
-BROKER_URL = 'amqp://localhost'
-CELERY_RESULT_BACKEND = 'db+postgresql://django:9ff48e7770a2a82641bb9207b8b18722@localhost/django'
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+#CELERY_RESULT_BACKEND = 'db+postgresql://django:9ff48e7770a2a82641bb9207b8b18722@localhost/django'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Africa/Nairobi'
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
