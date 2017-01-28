@@ -15,6 +15,7 @@ def searchURL(request):
 
         analyze(_url) #calls watson analyze
         response_data = getKeywords()
+        #response_data ={"hi":"hi"}
 
         return HttpResponse(json.dumps(response_data),content_type='application/json')
     else:

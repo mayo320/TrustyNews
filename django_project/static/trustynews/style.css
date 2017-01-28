@@ -1,4 +1,20 @@
-body{}
-.search_form{position: absolute;top:0;left:0;height:100%;width:100%;background: rgb(254, 244, 225);}
+body{margin:0;}
+ul{padding:0; margin:0px;}
+
+/*SEARCH*/
+.search_form{position: absolute;height:100%; width:100%; background: rgb(254, 244, 225); transition: 0.5s ease;}
 .search_form .search_box{text-align: center;height:20px;position: absolute; margin: auto;top:0;bottom:20%;left:0;right:0;}
 .search_form input{min-width:400px; width:40%;display: inline-block;}
+
+.searched{height:100px;}
+
+/*ITEMS*/
+.items_cont{position: absolute;top:100%; transition: 0.5s ease; display: none; left:0;right:0;min-width:600px; width:70%;margin:auto; background:rgb(185, 209, 200);}
+.items_cont .tabs_cont{border-bottom:1px solid black;}
+.items_cont .tabs_cont ul{margin-bottom:0px;}
+.items_cont .tabs_cont li{display: inline-block; width:25%; text-align: left; padding: 0px 0px 0px 10px;}
+.items_cont .tabs_cont li:hover{background:rgba(1, 1, 1, 0.77);color:white; cursor:pointer;}
+
+.display{ top:120px; display: block;}
+
+.items_cont .content_cont{margin:10px;}

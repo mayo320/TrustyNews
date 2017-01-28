@@ -9,18 +9,65 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
         <!-- <script src="{% static 'common/js/jquery.js' %}"></script> -->
-        <script type="text/javascript" src="../../static/trustynews/script.js"> </script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+        <script type="text/javascript" src="../../static/trustynews/script.js"> </script>
+
+        <script type="text/javascript">
+            //for some reasons only ajax call only works here, doesn't work in scrit.js
+            function search(){
+                console.log("posted");
+                _url = $("input[name='searchURL']").val();
+                $.ajax({
+                   url: "trustynews/searchURL",
+                   type: "POST",
+                   data: {
+                       'url':_url,
+                       csrfmiddlewaretoken: "{{ csrf_token }}"
+                   },
+                   success:function(json){
+                       console.log(json);
+                   },
+                   error:function(){
+                       //alert("no");
+                   }
+                });
+
+                $(".search_form").addClass("searched");
+                setTimeout(function(){
+                    $(".items_cont").addClass("display");
+                },500);
+            }
+        </script>
     </head>
     <body ng-app="trustynews">
         <div class="search_form" ng-controller="search-ctrl">
             <div class="search_box">
                 <form class="" action="index.html" method="post">
+                    {% csrf_token %}
                     <input class="form-control" type="text" name="searchURL" value="" placeholder="Input you news URL">
-                    <button type="button" name="button" class='btn btn-default' ng-click="search()">GO</button>
+                    <button type="button" name="button" class='btn btn-default' onclick="search()">GO</button>
                 </form>
             </div>
         </div>
+
+        <div class="items_cont">
+            <div class="tabs_cont">
+                <ul>
+                    <li><h4>Overview</h4></li><li><h4>Machine Learning</h4></li><li><h4>Google Searches</h4></li><li><h4>Misc</h4></li>
+
+                </ul>
+            </div>
+            <div class="content_cont">
+                <div class="watson_cont">
+                    <h3>This artical is GOOD</h3>
+                </div>
+            </div>
+
+        </div>
+
+
     </body>
 </html>
