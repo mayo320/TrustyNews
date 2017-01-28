@@ -17,6 +17,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^$', include('trustynews.urls')),
+    url(r'^$', include('home.urls')),
+    url(r'^trustynews/', include('trustynews.urls',namespace='trustynews')),
     url(r'^admin/', include(admin.site.urls)),
 ]
