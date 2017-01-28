@@ -1,4 +1,5 @@
 import json
+import URLHelper
 from os.path import join, dirname
 from watson_developer_cloud import AlchemyLanguageV1
 from watson_developer_cloud import ToneAnalyzerV3
@@ -15,7 +16,13 @@ def analyze(url):
     data = alchemy_language.combined(url=url, extract=combined_operations)
     tone_analyzer = ToneAnalyzerV3(username=toneUser,password=tonePass,version='2016-05-19')
     global tone
-    tone = tone_analyzer.tone(text=webScrape.getText(url))['document_tone']['tone_categories']
+    text=webScrape.getText(url)
+    text = text.encode('ascii','ignore')
+    if len(text)>120000:
+        text = text[0:120000]
+    if text.count('\n')>750:
+        text = text[0:URLHelper.linSearch(text,'\n', 750)]
+    tone = tone_analyzer.tone(text=text)['document_tone']['tone_categories']
 
 def getTitle():
     global data
