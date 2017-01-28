@@ -14,4 +14,3 @@ def getText(url):
     # drop blank lines
     text = '\n'.join(chunk for chunk in chunks if chunk)
     return text
-

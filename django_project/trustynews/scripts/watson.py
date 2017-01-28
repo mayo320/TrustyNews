@@ -36,7 +36,7 @@ def getKeywords():
 def getKeyKeywords():
     words = []
     global data
-    for i in range(0,7):
+    for i in range(0,min(7, len(getKeywords()))):
         words.append(data['keywords'][i]['text'])
     return words
     
