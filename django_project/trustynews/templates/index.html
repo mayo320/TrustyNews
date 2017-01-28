@@ -3,8 +3,24 @@
     <head>
         <meta charset="utf-8">
         <title>Trusty News</title>
+        <!-- {% load staticfiles %} -->
+        <link rel="stylesheet" href="{% static 'trustynews/style.css' %}">
+        <link rel="stylesheet" href="../../static/trustynews/style.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+        <!-- <script src="{% static 'common/js/jquery.js' %}"></script> -->
+        <script type="text/javascript" src="../../static/trustynews/script.js"> </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     </head>
-    <body>
-        hi
+    <body ng-app="trustynews">
+        <div class="search_form" ng-controller="search-ctrl">
+            <div class="search_box">
+                <form class="" action="index.html" method="post">
+                    <input class="form-control" type="text" name="searchURL" value="" placeholder="Input you news URL">
+                    <button type="button" name="button" class='btn btn-default' ng-click="search()">GO</button>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

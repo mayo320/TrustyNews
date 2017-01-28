@@ -1,0 +1,4 @@
+body{}
+.search_form{position: absolute;top:0;left:0;height:100%;width:100%;background: rgb(254, 244, 225);}
+.search_form .search_box{text-align: center;height:20px;position: absolute; margin: auto;top:0;bottom:20%;left:0;right:0;}
+.search_form input{min-width:400px; width:40%;display: inline-block;}
