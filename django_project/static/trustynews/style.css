@@ -1,20 +1,37 @@
-body{margin:0;}
+body{margin:0; font-family: sans-serif; }
 ul{padding:0; margin:0px;}
+li{list-style: none;}
+hr{color:black;}
+
+.hide{display: none;}
 
 /*SEARCH*/
-.search_form{position: absolute;height:100%; width:100%; background: rgb(254, 244, 225); transition: 0.5s ease;}
+.search_form{position: absolute;height:100%; width:100%; transition: 0.5s ease;}
 .search_form .search_box{text-align: center;height:20px;position: absolute; margin: auto;top:0;bottom:20%;left:0;right:0;}
 .search_form input{min-width:400px; width:40%;display: inline-block;}
 
-.searched{height:100px;}
+.searched{height:100px; position:relative;}
 
 /*ITEMS*/
-.items_cont{position: absolute;top:100%; transition: 0.5s ease; display: none; left:0;right:0;min-width:600px; width:70%;margin:auto; background:rgb(185, 209, 200);}
+.items_cont{ transition: 0.5s ease; display: none; left:0; right:0; min-width:600px; width:70%;margin:auto; padding-bottom:10px;
+    -webkit-box-shadow: 0px 0px 11px 2px rgba(138,138,138,0.51);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(138,138,138,0.51);
+    box-shadow: 0px 0px 11px 2px rgba(138,138,138,0.51); border-radius:5px;}
 .items_cont .tabs_cont{border-bottom:1px solid black;}
 .items_cont .tabs_cont ul{margin-bottom:0px;}
 .items_cont .tabs_cont li{display: inline-block; width:25%; text-align: left; padding: 0px 0px 0px 10px;}
 .items_cont .tabs_cont li:hover{background:rgba(1, 1, 1, 0.77);color:white; cursor:pointer;}
 
-.display{ top:120px; display: block;}
+.display{  display: block; position: relative;}
+.selected{ background:rgba(1, 1, 1, 0.77);color:white;}
 
 .items_cont .content_cont{margin:10px;}
+
+/*ML*/
+.items_cont .ml_cont .stats{text-align: center;}
+.items_cont .ml_cont .stats .col{width:30%;background:rgb(240, 235, 225); display: inline-block; margin:1%; vertical-align: top;}
+.items_cont .ml_cont .stats .col ul li{margin:5px 5px; text-align: left; position: relative; color:black; border-radius:3px; border:1px solid white; padding: 5px;}
+.items_cont .ml_cont .stats .col ul li span{z-index: 50;position: relative;left:0;top:0; color:rgb(111, 165, 180);}
+.items_cont .ml_cont .stats .col ul li div{height:100%; width:50%; background:white; position: absolute; top:0; left:0;}
+.items_cont .ml_cont .keywords h4{text-align: center;}
+.items_cont .ml_cont .keywords li{width:33%; display:inline-block;}
