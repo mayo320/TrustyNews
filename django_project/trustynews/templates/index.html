@@ -20,54 +20,73 @@
             //for some reasons only ajax call only works here, doesn't work in scrit.js
             function search(){
                 console.log("posted");
-                _url = $("input[name='searchURL']").val();
-                $.ajax({
-                   url: "trustynews/searchURL",
-                   type: "POST",
-                   data: {
-                       'url':_url,
-                       csrfmiddlewaretoken: "{{ csrf_token }}"
-                   },
-                   success:function(json){
-                       console.log(json);
-                       setupML(json);
-                   },
-                   error:function(){
-                       //alert("no");
-                   }
-                });
+                _url = $("input[name='searchURL']").val().trim();
+                console.log(_url);
+                if(isURL(_url)){
+                    $("button[name='go']").attr('disabled', true);
+                    $(".loading").show().html("LOADING...");
 
-                $(".search_form").addClass("searched");
-                setTimeout(function(){
-                    $(".items_cont").addClass("display");
-                },500);
+                    $.ajax({
+                       url: "trustynews/searchURL",
+                       type: "POST",
+                       data: {
+                           'url':_url,
+                           csrfmiddlewaretoken: "{{ csrf_token }}"
+                       },
+                       success:function(json){
+                           console.log(json);
+                           setupML(json);
+                           $(".items_cont").addClass("display");
+                           $("button[name='go']").attr('disabled', false);
+                           $(".loading").hide();
+                       },
+                       error:function(){
+                           //alert("no");
+                       }
+                    });
+
+                    $(".search_form").addClass("searched");
+                }else{
+                    $(".loading").show().html("INVALID URL");
+                }
+
             }
         </script>
     </head>
     <body>
+        <div class="" style="width:100%;height:100%;">
+
+
         <div class="search_form" >
             <div class="search_box">
                 <form class="" action="index.html" method="post">
                     {% csrf_token %}
                     <input class="form-control" type="text" name="searchURL" value="" placeholder="Input you news URL">
-                    <button type="button" name="button" class='btn btn-default' onclick="search()">GO</button>
+                    <button type="button" name="go" class='btn btn-default' onclick="search()">GO</button>
                 </form>
+                <span class="loading">LOADING...</span>
             </div>
         </div>
 
         <div class="items_cont">
             <div class="tabs_cont">
                 <ul>
-                    <li><h4>Overview</h4></li><li class="selected"><h4>Machine Learning</h4></li><li><h4>Google Searches</h4></li><li><h4>Misc</h4></li>
+                    <li onclick="changeTab(0)" class="selected"><h4>Overview</h4></li><li class="" onclick="changeTab(1)"><h4>Machine Learning</h4></li><li onclick="changeTab(2)"><h4>Google Searches</h4></li><li onclick="changeTab(4)"><h4>Misc</h4></li>
 
                 </ul>
             </div>
             <div class="content_cont">
-                <div class="watson_cont hide">
-                    <h3>This artical is GOOD</h3>
+                <div class="overview_cont cont">
+                    <h3>This domain is known to be <span>RELIABLE</span></h3>
+                    <p>According to:</p>
+                    <ul>
+                        <li><h4>IBM Watson thinks it is <span class="percent"></span> reliable</h4></li>
+                        <li><h4>Google search algorithms thinks it is <span class="percent"></span> reliable</h4></li>
+                        <li><h4>We think this article is <span class="percent"></span> reliable</h4></li>
+                    </ul>
                 </div>
 
-                <div class="ml_cont">
+                <div class="ml_cont hide cont">
                     <div class="stats">
                         <div class="col">
                             <h5>Emotional Tone</h5>
@@ -114,10 +133,12 @@
                         </ul>
                     </div>
                 </div>
+                <div class="google_cont hide cont">
+                </div>
             </div>
 
         </div>
 
-
+    </div>
     </body>
 </html>
