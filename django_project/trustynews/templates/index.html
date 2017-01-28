@@ -14,6 +14,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
         <script type="text/javascript" src="../../static/trustynews/script.js"> </script>
+        <script src="{% static 'trustynews/script.js' %}"></script>
 
         <script type="text/javascript">
             //for some reasons only ajax call only works here, doesn't work in scrit.js
@@ -29,6 +30,7 @@
                    },
                    success:function(json){
                        console.log(json);
+                       setupML(json);
                    },
                    error:function(){
                        //alert("no");
@@ -42,8 +44,8 @@
             }
         </script>
     </head>
-    <body ng-app="trustynews">
-        <div class="search_form" ng-controller="search-ctrl">
+    <body>
+        <div class="search_form" >
             <div class="search_box">
                 <form class="" action="index.html" method="post">
                     {% csrf_token %}
@@ -99,10 +101,13 @@
                                 <li><div></div><span>Social Reliability</span><span class="percent"></span></li>
                             </ul>
                         </div>
+                        <div class="overalltotal">
+                            <div></div><span>Total Reliability </span><span class="percent"></span>
+                        </div>
                     </div>
                     <div class="keywords">
-                        <h4>Keywords</h4>
                         <hr>
+                        <h4>Keywords</h4>
                         <ul>
                             <li>DONALD TRUMP</li>
                             <li>HIHI TRUMP</li>
