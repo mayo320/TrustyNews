@@ -15,7 +15,7 @@ def analyze(url):
     data = alchemy_language.combined(url=url, extract=combined_operations)
     tone_analyzer = ToneAnalyzerV3(username=toneUser,password=tonePass,version='2016-05-19')
     global tone
-    tone = tone_analyzer.tone(text=webScrape.getText(url))
+    tone = tone_analyzer.tone(text=webScrape.getText(url))['document_tone']['tone_categories']
 
 def getTitle():
     global data
@@ -38,8 +38,14 @@ def getEmotions():
     emotions= data['docEmotions']
     return emotions
 
-def getTone():
+def getEmotionTone():
     global tone
-    return tone
+    return tone[0]['tones']
 
+def getLanguageTone():
+    global tone
+    return tone[1]['tones']
 
+def getSocialTone():
+    global tone
+    return tone[2]['tones']
