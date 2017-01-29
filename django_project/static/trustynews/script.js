@@ -51,6 +51,7 @@ function setupML(data){
     keywords.html(str);
 }
 function setupOverview(data){
+    $(".overview_cont .art_name span").html(data.MachineLearning.Title);
     $reliable = $(".content_cont .overview_cont .reliability");
     $reliable.show();
     if(data.DomainCheck == 1) $reliable.find("span").html("RELIABLE").removeClass("red").addClass("green");
@@ -63,7 +64,10 @@ function setupOverview(data){
     if(data.MachineLearning.Total) $($tab_re[0]).find(".percent").html(Math.round(data.MachineLearning.Total*100)+"%");
     else $($tab_re[0]).find(".percent").html("(no available data)");
     $($tab_re[1]).find(".percent").html(Math.round(data.SearchResults.SearchReliability*100)+"%");
-    //$($tab_re[2]).find(".percent").html(Math.round(data.TotalReliability*100)+"%");
+    $($tab_re[2]).find(".percent").html(Math.round(data.TotalReliability*100)+"%");
+    if(data.TotalReliability < 0.5) $($tab_re[2]).addClass("red").removeClass("yellow").removeClass("green");
+    else if(data.TotalReliability < 0.8) $($tab_re[2]).addClass("yellow").removeClass("green").removeClass("red");
+    else $($tab_re[2]).addClass("green").removeClass("yellow").removeClass("red");
 
 
 }

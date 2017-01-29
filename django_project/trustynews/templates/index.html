@@ -24,6 +24,7 @@
                 if(isURL(_url)){
                     $("button[name='go']").attr('disabled', true);
                     $(".loading").show().html("LOADING...");
+                    $(".jackLoader").show();
 
                     $.ajax({
                        url: "trustynews/searchURL",
@@ -41,6 +42,7 @@
                            $(".items_cont").addClass("display");
                            $("button[name='go']").attr('disabled', false);
                            $(".loading").hide();
+                           $(".jackLoader").hide()
                        },
                        error:function(){
                            //alert("no");
@@ -71,8 +73,16 @@
                     <input class="form-control" type="text" name="searchURL" value="" placeholder="Input you news URL">
                     <button type="button" name="go" class='btn btn-default' onclick="search()">GO</button>
                 </form>
+                <div class="jackLoader">
+        			<svg width='100%' height='100%' viewBox='0 0 100 100' preserveAspectRatio='none' style="overflow:visible;">
+        				<path id='block1' d='M0 0 L0 60 L60 0 L0 0 Z'/>
+        				<path id='block3' d='M100 100 L40 100 L100 40 L100 100 Z'/>
+        				<path id='block2' d='M75 0 L100 0 L100 25 L25 100 L0 100 L0 75 L0 75 Z'/>
+        			</svg>
+        		</div>
                 <span class="loading">LOADING...</span>
             </div>
+
         </div>
 
         <div class="items_cont">
@@ -84,12 +94,13 @@
             </div>
             <div class="content_cont">
                 <div class="overview_cont cont">
+                    <h3 class="art_name">For Article <span></span></h3>
                     <h3 class="reliability">This domain is known to be <span>RELIABLE</span></h3>
                     <p>According to:</p>
                     <ul>
                         <li><h4>IBM Watson thinks it is <span class="percent"></span> reliable</h4></li>
                         <li><h4>Google search algorithms thinks it is <span class="percent"></span> reliable</h4></li>
-                        <li><h4>We think this article is <span class="percent"></span> reliable</h4></li>
+                        <li><h4 style="font-weight: bold;">We think this article is <span class="percent"></span> reliable</h4></li>
                     </ul>
                 </div>
 
@@ -157,8 +168,8 @@
                 <div class="cont hide misc_cont">
                     <h3>This is a 2017 Delta Hacks 3 Project created by:</h3>
                     <ul>
-                        <li><h4>Jack Yan</h4></li>
-                        <li><h4>David Zhang</h4></li>
+                        <li><h4>Jack (Zongjie) Yan</h4></li>
+                        <li><h4>David (HaoRan) Zhang</h4></li>
                         <li><h4>Leo Kim</h4></li>
                     </ul>
 
