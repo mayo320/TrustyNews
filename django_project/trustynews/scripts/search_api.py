@@ -3,7 +3,6 @@ import DatabaseSearch
 import math
 import json
 
-
 def keyword_search(keyword):
 	news = Google.search_news(keyword, 10, 0, True, 'h', "us")
 
@@ -21,9 +20,17 @@ def keyword_search(keyword):
 
 	dif = 0
 	data = []
+
+                       
+	
 	for result in news["results"]:
 		currentURL = {}
 		link = result["link"]
+
+		index = link.find('&sa')
+		if index != -1:
+			link= link[0:index]
+		
 		currentURL['url'] = link
 		if DatabaseSearch.is_fake(link):
 			dif = dif - 0.5
