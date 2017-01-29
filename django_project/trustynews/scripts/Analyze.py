@@ -4,7 +4,7 @@ import search_api
 def analyze(url):
     returnList= {}
     returnList['MachineLearning'] =  MLAnalysis.calculate(url)
-    
+
     if DatabaseSearch.is_valid(url):
         returnList['DomainCheck'] = 1
     elif DatabaseSearch.is_fake(url):
@@ -16,7 +16,6 @@ def analyze(url):
     for i in range(0,3):
         stringList.append(returnList['MachineLearning']['Keywords'][i].encode('ascii','ignore'))
 
-    returnList['SearchResults'] = " ".join(search_api.keyword_search(stringList))
-    #returnList['TotalReliability'] = 
+    returnList['SearchResults'] = search_api.keyword_search(" ".join(stringList))
+    #returnList['TotalReliability'] =
     return returnList
-    
