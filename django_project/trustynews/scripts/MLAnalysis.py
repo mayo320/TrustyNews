@@ -8,11 +8,13 @@ def calculate(url):
         returnList = {}
         keywords = watson.getKeyKeywords()
         returnList['Keywords'] = keywords
+        returnList['Title'] = watson.getTitle()
         return returnList
     else:
         returnList = {}
         keywords = watson.getKeyKeywords()
         returnList['Keywords'] = keywords
+        returnList['Title'] = watson.getTitle()
         
         emoA = watson.getEmotions()
         emoB = watson.getEmotionTone()
