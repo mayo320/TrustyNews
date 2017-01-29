@@ -17,5 +17,9 @@ def analyze(url):
         stringList.append(returnList['MachineLearning']['Keywords'][i].encode('ascii','ignore'))
 
     returnList['SearchResults'] = search_api.keyword_search(" ".join(stringList))
-    #returnList['TotalReliability'] =
+
+    if "Total" in returnList['MachineLearning'].keys():
+        returnList['TotalReliability'] = 0.8*returnList['SearchResults']['SearchReliability'] + 0.2*returnList['MachineLearning']['Total']
+    else:        
+        returnList['TotalReliability'] = returnList['SearchResults']['SearchReliability']
     return returnList
