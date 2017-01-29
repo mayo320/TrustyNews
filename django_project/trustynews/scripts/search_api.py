@@ -23,18 +23,20 @@ def keyword_search(keyword):
 	data = []
 	i = 0
 	for result in news["results"]:
+		currentURL = {}
 		link = result["link"]
-		data[i]['url'] = link
+		currentURL['url'] = link
 		if DatabaseSearch.is_fake(link):
 			dif = dif - 0.5
-			data[i]['reliable'] = 0
+			currentURL['reliable'] = 0
 		elif DatabaseSearch.is_valid(link):
 			dif = dif + 1
-			data[i]['reliable'] = 1
+			currentURL['reliable'] = 1
 		else:
 			# unknown
-			data[i]['reliable'] = 2
+			currentURL['reliable'] = 2
 		i+=1
+		data.append(currentURL)
 
 	if dif >=3.5:
 		score = min(dif*scale/2.0,1)

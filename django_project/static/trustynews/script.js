@@ -12,12 +12,8 @@ $(document).ready(function(){
     });
 });
 
-var myApp = angular.module("myApp",[]);
-myApp.controller("google_ctrl",function($scope){
-
-});
-
-function setupML(MLjson){
+function setupML(data){
+    MLjson = data.MachineLearning;
     $cols = $(".ml_cont .stats .col ul");
     $emotion = $($cols[0]).find("li");
     $lang = $($cols[1]).find("li");
@@ -52,22 +48,38 @@ function setupML(MLjson){
 function setupOverview(data){
     $reliable = $(".content_cont .overview_cont .reliability");
     $reliable.show();
-<<<<<<< HEAD
-    if(data.DomainCheck == 1) $reliable.find("span").html("RELIABLE");
-    else if(data.DomainCheck == 0) $reliable.find("span").html("NOT RELIABLE");
-=======
     if(data.DomainCheck == 1) $reliable.find("span").html("RELIABLE").addClass("green");
     else if(data.DomainCheck == 0) $reliable.find("span").html("NOT RELIABLE").addClass("red");
->>>>>>> fab9097e66281694e492797eedb6b411812ab096
     else $reliable.hide();
 
 
     $tab_re = $(".overview_cont ul li");
 
     $($tab_re[0]).find(".percent").html(Math.round(data.MachineLearning.Total*100)+"%");
-    //$($tab_re[1]).find(".percent").html(Math.round(data.Google.Total*100)+"%");
+    $($tab_re[1]).find(".percent").html(Math.round(data.SearchResults.SearchReliability*100)+"%");
 
 
+}
+function setupGoogle(data){
+    googleJson = data.SearchResults;
+    google = $(".google_cont");
+    google.find(".total_results").html(googleJson.NumResults);
+    keywords = data.MachineLearning.Keywords[0] + " " + data.MachineLearning.Keywords[1] + " " + data.MachineLearning.Keywords[2];
+    google.find(".searched_keywords").html(keywords);
+    google.find(".percent").html(Math.round(googleJson.SearchReliability*100)+"%");
+
+    google.find(".overalltotal div").css("width",Math.round(googleJson.SearchReliability*100)+"%");
+    str = '';
+    for (var i = 0; i < googleJson.URLs.length; i++) {
+        reliability_class = googleJson.URLs[i].reliable ? 'valid':'invalid';
+        reliability_str = googleJson.URLs[i].reliable ? 'RELIABLE':'NOT RELIABLE';
+        if(googleJson.URLs[i].reliable==2){
+            reliability_class = 'unknown';
+            reliability_str = 'UNKNOWN RELIABILITY';
+        }
+        str += '<li class="'+reliability_class+'"><a href="'+googleJson.URLs[i].url+'" target="_blank"><span class="url">' + googleJson.URLs[i].url + '</span><span>' + reliability_str + '</span></a></li>';
+    }
+    google.find("ul").html(str);
 }
 
 function changeTab(tab){

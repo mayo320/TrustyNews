@@ -52,10 +52,12 @@ hr{color:black;}
 .items_cont .google_cont ul{margin:20px;}
 .items_cont .google_cont ul li{background:rgb(207, 228, 170); padding:5px 20px; margin:5px; border-radius:5px; position: relative; overflow: hidden;}
 .items_cont .google_cont ul .invalid{background: rgb(205, 107, 107);}
-.items_cont .google_cont ul li span:not(.url){position: absolute; right:-100px; transition: 0.5s ease; color:white;}
+.items_cont .google_cont ul .unknown{background:rgb(218, 209, 152);}
+.items_cont .google_cont ul li span:not(.url){position: absolute; right:-200px; transition: 0.5s ease; color:white;}
 .items_cont .google_cont ul li:hover{cursor: pointer; background:rgb(134, 171, 73); }
-.items_cont .google_cont ul li:hover > span:not(.url){right:20px;}
+.items_cont .google_cont ul li:hover  span:not(.url){right:20px;}
 .items_cont .google_cont ul .invalid:hover{background: rgb(166, 55, 55);}
+.items_cont .google_cont ul .unknown:hover{background:rgb(177, 166, 97);}
 
 .red{color:rgb(166, 55, 55);}
 .green{color:rgb(134, 171, 73);}
