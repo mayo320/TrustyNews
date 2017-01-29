@@ -14,6 +14,11 @@ $(document).ready(function(){
 
 function setupML(data){
     MLjson = data.MachineLearning;
+    if(!MLjson.Emotion){
+        $(".ml_cont .stats").hide();
+        return;
+    }
+    $(".ml_cont .stats").show();
     $cols = $(".ml_cont .stats .col ul");
     $emotion = $($cols[0]).find("li");
     $lang = $($cols[1]).find("li");
@@ -21,15 +26,15 @@ function setupML(data){
 
     for (var i = 0; i < $emotion.length; i++) {
         $($emotion[i]).find("div").css("width",MLjson.Emotion[$($emotion[i]).find("span")[0].innerHTML]*100 + "%");
-        $($emotion[i]).find(".percent").css("width",Math.round(MLjson.Emotion[$($emotion[i]).find("span")[0].innerHTML]*100) + "%");
+        $($emotion[i]).find(".percent").html(" "+ Math.round(MLjson.Emotion[$($emotion[i]).find("span")[0].innerHTML]*100) + "%");
     }
     for (var i = 0; i < $lang.length; i++) {
         $($lang[i]).find("div").css("width",MLjson.Language[$($lang[i]).find("span")[0].innerHTML]*100 + "%");
-        $($lang[i]).find(".percent").css("width",Math.round(MLjson.Language[$($lang[i]).find("span")[0].innerHTML]*100) + "%");
+        $($lang[i]).find(".percent").html(" "+ Math.round(MLjson.Language[$($lang[i]).find("span")[0].innerHTML]*100) + "%");
     }
     for (var i = 0; i < $social.length; i++) {
         $($social[i]).find("div").css("width",MLjson.Social[$($social[i]).find("span")[0].innerHTML]*100 + "%");
-        $($social[i]).find(".percent").css("width",Math.round(MLjson.Social[$($social[i]).find("span")[0].innerHTML]*100) + "%");
+        $($social[i]).find(".percent").html(" "+ Math.round(MLjson.Social[$($social[i]).find("span")[0].innerHTML]*100) + "%");
     }
 
     total = $(".ml_cont .overalltotal");
@@ -48,15 +53,17 @@ function setupML(data){
 function setupOverview(data){
     $reliable = $(".content_cont .overview_cont .reliability");
     $reliable.show();
-    if(data.DomainCheck == 1) $reliable.find("span").html("RELIABLE").addClass("green");
-    else if(data.DomainCheck == 0) $reliable.find("span").html("NOT RELIABLE").addClass("red");
+    if(data.DomainCheck == 1) $reliable.find("span").html("RELIABLE").removeClass("red").addClass("green");
+    else if(data.DomainCheck == 0) $reliable.find("span").html("NOT RELIABLE, PROCEED WITH CAUTION!").removeClass("green").addClass("red");
     else $reliable.hide();
 
 
     $tab_re = $(".overview_cont ul li");
 
-    $($tab_re[0]).find(".percent").html(Math.round(data.MachineLearning.Total*100)+"%");
+    if(data.MachineLearning.Total) $($tab_re[0]).find(".percent").html(Math.round(data.MachineLearning.Total*100)+"%");
+    else $($tab_re[0]).find(".percent").html("(no available data)");
     $($tab_re[1]).find(".percent").html(Math.round(data.SearchResults.SearchReliability*100)+"%");
+    //$($tab_re[2]).find(".percent").html(Math.round(data.TotalReliability*100)+"%");
 
 
 }
