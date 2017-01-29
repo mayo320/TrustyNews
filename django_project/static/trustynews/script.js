@@ -1,5 +1,15 @@
+searching = false;
 $(document).ready(function(){
     $("button[name='go']").attr('disabled', false);
+
+    $(".search_form input[name='searchURL']").keypress(function(event){
+        if(event.keyCode == 13){
+            event.preventDefault();
+            if(!searching) $("button[name='go']").click();
+            searching = true;
+            $(this).blur();
+        }
+    });
 });
 
 var myApp = angular.module("myApp",[]);
@@ -43,8 +53,8 @@ function setupOverview(data){
     if(data.DomainCheck){
         $reliable = $(".content_cont .overview_cont .reliability");
         $reliable.show();
-        if(data.DomainCheck == 1) $reliable.find("span").html("RELIABLE");
-        else if(data.DomainCheck == 0) $reliable.find("span").html("NOT RELIABLE");
+        if(data.DomainCheck == 1) $reliable.find("span").html("RELIABLE").addClass("green");
+        else if(data.DomainCheck == 0) $reliable.find("span").html("NOT RELIABLE").addClass("red");
         else $reliable.hide();
     }
 

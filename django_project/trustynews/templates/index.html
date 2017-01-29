@@ -34,6 +34,7 @@
                            csrfmiddlewaretoken: "{{ csrf_token }}"
                        },
                        success:function(json){
+                           searching = false;
                            console.log(json);
                            setupML(json.MachineLearning);
                            setupOverview(json);
@@ -43,6 +44,7 @@
                        },
                        error:function(){
                            //alert("no");
+                           searching = false;
                        }
                     });
 
@@ -64,7 +66,7 @@
 
         <div class="search_form" >
             <div class="search_box">
-                <form class="" action="index.html" method="post">
+                <form class="" action="index.html" method="post" id="inputForm">
                     {% csrf_token %}
                     <input class="form-control" type="text" name="searchURL" value="" placeholder="Input you news URL">
                     <button type="button" name="go" class='btn btn-default' onclick="search()">GO</button>
@@ -126,7 +128,7 @@
                             </ul>
                         </div>
                         <div class="overalltotal">
-                            <div></div><span>Total Reliability </span><span class="percent"></span>
+                            <div></div><span>Total Reliability: </span><span class="percent"></span>
                         </div>
                     </div>
                     <div class="keywords">
@@ -147,9 +149,9 @@
                     <hr>
                     <h4>The top ten results are the following, with red being unreliable sources</h4>
                     <ul>
-                        <li><span>URL://url.com</span></li>
-                        <li class="invalid"><span>URL://url.com</span></li>
-                        <li><span>URL://url.com</span></li>
+                        <li><span class="url">URL://url.com</span><span>RELIABLE</span></li>
+                        <li class="invalid"><span class="url">URL://url.com</span><span>NOT RELIABLE</span></li>
+                        <li><span class="url">URL://url.com</span><span>RELIABLE</span></li>
                     </ul>
                 </div>
             </div>
