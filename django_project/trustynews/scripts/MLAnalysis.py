@@ -19,7 +19,7 @@ def calculate(url):
     
     language = watson.getLanguageTone()
     lang = {'Analytical':language[0]['score'], 'Confident':language[1]['score'], 'Tentative':language[2]['score']}
-    lang['Language Reliability'] = min(1,max(0,1.5*lang['Analytical'] - lang['Tentative'] - 0.2*lang['Confident']))
+    lang['Language Reliability'] = min(1,max(0,lang['Analytical'] - lang['Tentative'] - 0.2*lang['Confident']))
     returnList['Language'] = lang
 
     social = watson.getSocialTone()
