@@ -44,3 +44,13 @@ hr{color:black;}
 .items_cont .ml_cont .overalltotal div{position: absolute;top:0;left:0;background:white;height:100%;width:70%;}
 .items_cont .ml_cont .keywords h4{text-align: center;}
 .items_cont .ml_cont .keywords li{width:33%; display:inline-block;}
+
+/*GOOGLE*/
+.items_cont .google_cont .overalltotal{position: relative; background:rgb(240, 235, 225); padding:2px; border: 2px solid rgb(240, 235, 225);text-align: center;}
+.items_cont .google_cont .overalltotal span{position: relative;top:0;left:0;}
+.items_cont .google_cont .overalltotal div{position: absolute;top:0;left:0;background:white;height:100%;width:70%;}
+.items_cont .google_cont ul{margin:20px;}
+.items_cont .google_cont ul li{background:rgb(207, 228, 170); padding:5px; margin:5px; border-radius:5px;}
+.items_cont .google_cont ul .invalid{background: rgb(205, 107, 107);}
+.items_cont .google_cont ul li:hover{cursor: pointer; background:rgb(134, 171, 73); }
+.items_cont .google_cont ul .invalid:hover{background: rgb(166, 55, 55);}
