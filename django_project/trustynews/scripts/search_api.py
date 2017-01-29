@@ -1,6 +1,8 @@
 from pws import Google
 import DatabaseSearch
 import math
+import json
+
 
 def keyword_search(keyword):
 
@@ -29,3 +31,18 @@ def keyword_search(keyword):
 			
 	
 
+def url_list(keyword):
+	news = Google.search_news('keyword', 10, 0, True, 'h', "us")
+	data = {}
+
+	for result in news["results"]:
+		link = result["link"]
+		if DatabaseSearch.is_fake(link):
+			data[link] = 0
+		elif DatabaseSearch.is_valid(link):
+			data[link] = 1
+		else:
+			# unknown
+			data[link] = 2
+
+	return json.dumps(data)
