@@ -1,10 +1,10 @@
 from pws import Google
 import DatabaseSearch
-
+import math
 
 def keyword_search(keyword):
 
-	news = Google.search_news('keyword', 10, 0, True, 'd', "es")
+	news = Google.search_news('keyword', 10, 0, True, 'h', "us")
 
 	# Arguments:
 	# search(query, num, start, sleep, recent)
@@ -16,18 +16,16 @@ def keyword_search(keyword):
 	# country_code: For local results.
 
 	total_results =  news["total_results"]
+	print total_results
+	scale = 1 - math.exp(- total_results / 80000)
 
 	for result in news["results"]:
 		link = result["link"]
 		if DatabaseSearch.is_valid(link):
-			print total_results
-			if total_results > 10000:
-				return True
-			else:
-				return False
+			return scale
 	
 	print "couldn't find valid source"
-	return False
+	return 0.0
 			
 	
 
