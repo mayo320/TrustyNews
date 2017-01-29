@@ -50,13 +50,12 @@ function setupML(MLjson){
     keywords.html(str);
 }
 function setupOverview(data){
-    if(data.DomainCheck){
-        $reliable = $(".content_cont .overview_cont .reliability");
-        $reliable.show();
-        if(data.DomainCheck == 1) $reliable.find("span").html("RELIABLE").addClass("green");
-        else if(data.DomainCheck == 0) $reliable.find("span").html("NOT RELIABLE").addClass("red");
-        else $reliable.hide();
-    }
+    $reliable = $(".content_cont .overview_cont .reliability");
+    $reliable.show();
+    if(data.DomainCheck == 1) $reliable.find("span").html("RELIABLE").addClass("green");
+    else if(data.DomainCheck == 0) $reliable.find("span").html("NOT RELIABLE").addClass("red");
+    else $reliable.hide();
+
 
     $tab_re = $(".overview_cont ul li");
 
