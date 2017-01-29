@@ -4,9 +4,9 @@ import math
 import json
 
 
-def keyword_search(keyword):
 
-	news = Google.search_news('keyword', 10, 0, True, 'h', "us")
+def keyword_search(keyword):
+	news = Google.search_news(keyword, 10, 0, True, 'h', "us")
 
 	# Arguments:
 	# search(query, num, start, sleep, recent)
@@ -18,31 +18,30 @@ def keyword_search(keyword):
 	# country_code: For local results.
 
 	total_results =  news["total_results"]
-	print total_results
-	scale = 1 - math.exp(- total_results / 80000)
+	scale = 1 - math.exp(- total_results / 80000.0)
 
+	dif = 0
+	data = []
+	i = 0
 	for result in news["results"]:
 		link = result["link"]
-		if DatabaseSearch.is_valid(link):
-			return scale
-	
-	print "couldn't find valid source"
-	return 0.0
-			
-	
-
-def url_list(keyword):
-	news = Google.search_news('keyword', 10, 0, True, 'h', "us")
-	data = {}
-
-	for result in news["results"]:
-		link = result["link"]
+		data[i]['url'] = link
 		if DatabaseSearch.is_fake(link):
-			data[link] = 0
+			dif = dif - 0.5
+			data[i]['reliable'] = 0
 		elif DatabaseSearch.is_valid(link):
-			data[link] = 1
+			dif = dif + 1
+			data[i]['reliable'] = 1
 		else:
 			# unknown
-			data[link] = 2
+			data[i]['reliable'] = 2
+		i+=1
 
-	return json.dumps(data)
+	if dif >=3.5:
+		score = min(dif*scale/2.0,1)
+	elif dif ==0:
+		score = scale*0.75
+	else:
+		score = scale
+
+	return {'SearchReliability':score, 'NumResults':total_results, 'URLs':data}
