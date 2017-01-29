@@ -21,7 +21,6 @@ def keyword_search(keyword):
 
 	dif = 0
 	data = []
-	i = 0
 	for result in news["results"]:
 		currentURL = {}
 		link = result["link"]
@@ -35,7 +34,6 @@ def keyword_search(keyword):
 		else:
 			# unknown
 			currentURL['reliable'] = 2
-		i+=1
 		data.append(currentURL)
 
 	if dif >=3.5:

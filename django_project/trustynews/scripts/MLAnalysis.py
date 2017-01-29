@@ -32,10 +32,10 @@ def calculate(url):
 
         social = watson.getSocialTone()
         soc = {'Openness':social[0]['score'],'Conscientiousness':social[1]['score'],'Extraversion':social[2]['score'],'Agreeableness':social[3]['score'],'Emotional Range':social[4]['score']}
-        soc['Social Reliability'] = min(1,0.4*soc['Conscientiousness'] + 0.3*soc['Emotional Range'] + 0.3*soc['Agreeableness'])
+        soc['Social Reliability'] = min(1,0.7*soc['Emotional Range'] + 0.2*soc['Agreeableness']-0.3*soc['Conscientiousness'] )
         returnList['Social'] = soc
 
-        totalScore = emotion['Emotional Reliability']*0.25+lang['Language Reliability']*0.5+0.25*soc['Social Reliability']
+        totalScore = emotion['Emotional Reliability']*0.5+lang['Language Reliability']*0.25+0.25*soc['Social Reliability']
         returnList['Total'] = totalScore
 
     return returnList
